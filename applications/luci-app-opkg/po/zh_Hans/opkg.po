@@ -108,6 +108,9 @@ msgid "Install"
 msgstr "安装"
 
 #: applications/luci-app-opkg/htdocs/luci-static/resources/view/opkg.js:283
+msgid "Install suggested translation packages as well"
+msgstr "同样安装推荐的翻译包"
+
 #: applications/luci-app-opkg/htdocs/luci-static/resources/view/opkg.js:494
 #: applications/luci-app-opkg/htdocs/luci-static/resources/view/opkg.js:1055
 msgid "Installed"
@@ -300,6 +303,9 @@ msgstr "无法保存 %s：%s"
 msgid "Update lists…"
 msgstr "更新列表…"
 
+msgid "Upgrade all…"
+msgstr "全部更新…"
+
 #: applications/luci-app-opkg/htdocs/luci-static/resources/view/opkg.js:1056
 msgid "Updates"
 msgstr "更新"
@@ -329,7 +335,15 @@ msgid "Waiting for the <em>opkg %h</em> command to complete…"
 msgstr "等待命令 <em>opkg %h</em> 执行完成…"
 
 #: applications/luci-app-opkg/htdocs/luci-static/resources/view/opkg.js:643
+msgctxt "Display translation packages"
+msgid "all"
+msgstr "全部"
+
 #: applications/luci-app-opkg/htdocs/luci-static/resources/view/opkg.js:831
+msgctxt "Display translation packages"
+msgid "filtered"
+msgstr "已过滤"
+
 #: applications/luci-app-opkg/htdocs/luci-static/resources/view/opkg.js:1024
 msgid "unknown"
 msgstr "未知"

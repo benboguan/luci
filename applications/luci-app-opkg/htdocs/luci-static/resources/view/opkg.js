@@ -182,7 +182,7 @@ function parseList(s, dest)
 			val = RegExp.$2.trim();
 		}
 		else if (pkg) {
-			dest.pkgs[pkg.name] = pkg;
+			dest.pkgs[pkg.name] = dest.pkgs[pkg.name] ? dest.pkgs[pkg.name] : pkg;
 
 			var provides = dest.providers[pkg.name] ? [] : [ pkg.name ];
 
@@ -232,7 +232,7 @@ function display(pattern)
 			var avail = packages.available.pkgs[name],
 			    inst  = packages.installed.pkgs[name];
 
-			if (!inst || !inst.installed)
+			if (!inst || !inst.installed || pkg.name.includes('kmod-') || pkg.name.includes('busybox') || pkg.name.includes('base-files'))
 				continue;
 
 			if (!avail || compareVersion(avail.version, pkg.version) <= 0)
@@ -245,6 +245,7 @@ function display(pattern)
 			btn = E('div', {
 				'class': 'btn cbi-button-positive',
 				'data-package': name,
+				'action': 'upgrade',
 				'click': handleInstall
 			}, _('Upgrade…'));
 		}
@@ -268,12 +269,14 @@ function display(pattern)
 				btn = E('div', {
 					'class': 'btn cbi-button-action',
 					'data-package': name,
+					'action': 'install',
 					'click': handleInstall
 				}, _('Install…'));
-			else if (inst.installed && inst.version != pkg.version)
+			else if (inst.installed && compareVersion(pkg.version, inst.version) > 0)
 				btn = E('div', {
 					'class': 'btn cbi-button-positive',
 					'data-package': name,
+					'action': 'upgrade',
 					'click': handleInstall
 				}, _('Upgrade…'));
 			else
@@ -369,6 +372,12 @@ function handleMode(ev)
 	tab.classList.add('cbi-tab');
 
 	currentDisplayMode = tab.getAttribute('data-mode');
+
+	if (currentDisplayMode == "updates"){
+	var filterv = document.querySelector('input[name="filter"]')
+	if ( filterv.value == "luci-app-")
+		filterv.value = ""
+	}
 
 	display(document.querySelector('input[name="filter"]').value);
 
@@ -631,6 +640,7 @@ function handleReset(ev)
 function handleInstall(ev)
 {
 	var name = ev.target.getAttribute('data-package'),
+		action = ev.target.getAttribute('action'),
 	    pkg = packages.available.pkgs[name],
 	    depcache = {},
 	    size;
@@ -687,7 +697,7 @@ function handleInstall(ev)
 		errs || inst || '',
 		E('div', { 'class': 'right' }, [
 			E('label', { 'class': 'cbi-checkbox', 'style': 'float:left' }, [
-				E('input', { 'id': 'overwrite-cb', 'type': 'checkbox', 'name': 'overwrite', 'disabled': isReadonlyView }), ' ',
+				E('input', { 'id': 'overwrite-cb', 'type': 'checkbox', 'name': 'overwrite', 'checked': 'checked', 'disabled': isReadonlyView }), ' ',
 				E('label', { 'for': 'overwrite-cb' }), ' ',
 				_('Overwrite files from other package(s)')
 			]),
@@ -697,7 +707,7 @@ function handleInstall(ev)
 			}, _('Cancel')),
 			' ',
 			E('div', {
-				'data-command': 'install',
+				'data-command': action,
 				'data-package': name,
 				'class': 'btn cbi-button-action',
 				'click': handleOpkg,
@@ -881,6 +891,10 @@ function handleOpkg(ev)
 		]);
 
 		var argv = [ cmd, '--force-removal-of-dependent-packages' ];
+		
+		argv.push('--force-checksum');
+		
+		argv.push('--force-depends');
 
 		if (rem && rem.checked)
 			argv.push('--autoremove');
@@ -1027,7 +1041,7 @@ return view.extend({
 				E('div', {}, [
 					E('label', {}, _('Filter') + ':'),
 					E('span', { 'class': 'control-group' }, [
-						E('input', { 'type': 'text', 'name': 'filter', 'placeholder': _('Type to filter…'), 'value': query, 'input': handleInput }),
+						E('input', { 'type': 'text', 'name': 'filter', 'placeholder': _('Type to filter…'), 'value': 'luci-app-', 'input': handleInput }),
 						E('button', { 'class': 'btn cbi-button', 'click': handleReset }, [ _('Clear') ])
 					])
 				]),
@@ -1044,6 +1058,7 @@ return view.extend({
 					E('label', {}, _('Actions') + ':'), ' ',
 					E('span', { 'class': 'control-group' }, [
 						E('button', { 'class': 'btn cbi-button-positive', 'data-command': 'update', 'click': handleOpkg, 'disabled': isReadonlyView }, [ _('Update lists…') ]), ' ',
+						E('button', { 'class': 'btn cbi-button-negative', 'data-command': 'upgradeall', 'click': handleOpkg, 'disabled': isReadonlyView }, [ _('Upgrade all…') ]), ' ',
 						E('button', { 'class': 'btn cbi-button-action', 'click': handleUpload, 'disabled': isReadonlyView }, [ _('Upload Package…') ]), ' ',
 						E('button', { 'class': 'btn cbi-button-neutral', 'click': handleConfig }, [ _('Configure opkg…') ])
 					])

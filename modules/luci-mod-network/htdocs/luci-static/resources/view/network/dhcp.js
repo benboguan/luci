@@ -256,6 +256,29 @@ return view.extend({
 		s.tab('leases', _('Static Leases'));
 		s.tab('hosts', _('Hostnames'));
 		s.tab('ipsets', _('IP Sets'));
+		s.tab('custom_domain', _('Custom Redirect Domain'));
+
+		o = s.taboption('custom_domain', form.SectionValue, 'domain', form.GridSection, 'domain', null,
+			_('Define a custom domain name and the corresponding PTR record'));
+
+		ss = o.subsection;
+		ss.addremove = true;
+		ss.anonymous = true;
+
+		so = ss.option(form.Value, 'name', _('Domain Name'));
+		so.datatype = 'hostname';
+		so.rmempty  = true;
+
+		so = ss.option(form.Value, 'ip', _('<abbr title=\"Internet Protocol Version 4\">IPv4</abbr>-Address'));
+		so.datatype = 'or(ip4addr,"ignore")';
+		so.rmempty  = true;
+
+		so = ss.option(form.Value, 'comments', _('Comments'));
+		so.rmempty  = true;
+
+		s.taboption('general', form.Flag, 'dns_redirect',
+			_('DNS Redirect'),
+			_('Redirect client DNS to dnsmasq'));
 
 		s.taboption('general', form.Flag, 'domainneeded',
 			_('Domain required'),
@@ -386,6 +409,19 @@ return view.extend({
 		s.taboption('advanced', form.Flag, 'filterwin2k',
 			_('Filter useless'),
 			_('Do not forward queries that cannot be answered by public resolvers.'));
+			_('Avoid uselessly triggering dial-on-demand links (filters SRV/SOA records and names with underscores).') + '<br />' +
+			_('May prevent VoIP or other services from working.'));
+
+		o = s.taboption('advanced', form.Flag, 'filter_aaaa',
+			_('Filter IPv6 AAAA records'),
+			_('Remove IPv6 addresses from the results and only return IPv4 addresses.') + '<br />' +
+			_('Can be useful if ISP has IPv6 nameservers but does not provide IPv6 routing.'));
+		o.optional = true;
+
+		o = s.taboption('advanced', form.Flag, 'filter_a',
+			_('Filter IPv4 A records'),
+			_('Remove IPv4 addresses from the results and only return IPv6 addresses.'));
+		o.optional = true;
 
 		s.taboption('advanced', form.Flag, 'localise_queries',
 			_('Localise queries'),
@@ -474,6 +510,13 @@ return view.extend({
 		o.optional = true;
 		o.datatype = 'range(0,10000)';
 		o.placeholder = 150;
+
+		o = s.taboption('advanced', form.Value, 'mini_ttl',
+			_('Minimum TTL to send to clients'),
+			_('Modify DNS entries minimum TTL (max is 86400, 0 is no modify)'));
+		o.optional = true;
+		o.datatype = 'range(0,86400)';
+		o.placeholder = 0;
 
 		o = s.taboption('pxe_tftp', form.Flag, 'enable_tftp',
 			_('Enable TFTP server'),

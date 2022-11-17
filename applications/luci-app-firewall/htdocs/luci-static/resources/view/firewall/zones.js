@@ -69,6 +69,14 @@ return view.extend({
 			p[i].value('ACCEPT', _('accept'));
 		}
 
+		if (L.hasSystemFeature('fullconenat')) {
+			o = s.option(form.Flag, 'fullcone', _('Enable FullCone NAT'), _('Using FullCone NAT can improve gaming performance effectively'));
+			/* o = s.option(form.Flag, 'fullcone6', _('Enable FullCone NAT6')); */
+
+		if (L.hasSystemFeature('hnat')) {
+			o = s.option(form.Flag, 'hnat', _('MTK HNAT'), _('Requires MTK hardware NAT support. Implemented at least for mtk-ramips'));
+		}
+
 		/* Netfilter flow offload support */
 
 		if (L.hasSystemFeature('offloading')) {
@@ -90,6 +98,26 @@ return view.extend({
 			o.depends('flow_offloading', '1');
 		}
 
+		/* MTK hnat support */
+
+		/*if (L.hasSystemFeature('hnat')) {
+			s = m.section(form.TypedSection, 'defaults', _('MTK/HNAT Offloading'),
+				_('Experimental feature. Not fully compatible with QoS/SQM.'));
+
+			s.anonymous = true;
+			s.addremove = false;
+
+			o = s.option(form.Flag, 'hnat_offloading',
+				_('MTK Software flow offloading'),
+				_('Software based mtk offloading for routing/NAT'));
+			o.optional = true;
+
+			o = s.option(form.Flag, 'hnat_offloading_hw',
+				_('MTK Hardware flow offloading'),
+				_('Requires MTK hardware NAT support. Implemented at least for mtk-ramips'));
+			o.optional = true;
+			o.depends('hnat', '1');
+		}*/
 
 		s = m.section(form.GridSection, 'zone', _('Zones'));
 		s.addremove = true;

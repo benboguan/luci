@@ -161,6 +161,42 @@ msgstr "5 分钟负载："
 msgid "6-octet identifier as a hex string - no colons"
 msgstr "十六进制表示的 6 字节标识符，无冒号分隔"
 
+msgid "Enable 256-QAM"
+msgstr "启用 256-QAM"
+
+msgid "802.11n 2.4Ghz Only"
+msgstr "只适合 802.11n 2.4Ghz"
+
+msgid "Enables The 802.11k standard provides information to discover the best available access point"
+msgstr "启用 802.11k 自动寻找发现最佳可用接入点的信息"
+
+msgid "Enable neighbor report via radio measurements"
+msgstr "启用无线电测量邻居报告"
+
+msgid "Enable beacon report via radio measurements"
+msgstr "启用无线电测量信标报告"
+
+msgid "Enables 802.11v allows client devices to exchange information about the network topology,tating overall improvement of the wireless network."
+msgstr "启用 802.11v 将允许客户端设备交换有关网络拓扑的信息，从而全面改善无线网络漫游"
+
+msgid "extended sleep mode for stations"
+msgstr "扩展无线休眠节能模式"
+
+msgid "BSS Transition Management"
+msgstr "BSS 传输管理"
+
+msgid "UTC time at which the TSF timer is 0"
+msgstr "TSF计时器为0的UTC时间"
+
+msgid "Time advertisement"
+msgstr "广播同步时间"
+
+msgid "time zone"
+msgstr "时区"
+
+msgid "Local time zone as specified in 8.3 of IEEE Std 1003.1-2004"
+msgstr "本地时区采用 IEEE Std 1003.1-2004 的 8.3 格式（例如 UTC8）"
+
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:1513
 msgid "802.11r Fast Transition"
 msgstr "802.11r 快速切换"
@@ -340,6 +376,16 @@ msgstr "ARP 重试阈值"
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/nftables.js:631
 msgid "ARP traffic table \"%h\""
 msgstr "ARP 流量表 \"%h\""
+
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:1151
+msgid ""
+"ARP, IPv4 and IPv6 (even 802.1Q) with multicast destination MACs are unicast "
+"to the STA MAC address. Note: This is not Directed Multicast Service (DMS) "
+"in 802.11v. Note: might break receiver STA multicast expectations."
+msgstr ""
+"带组播目的地 MAC 的ARP、IPv4 和 IPv6 (甚至 802.1Q) 是对 STA MAC 地址的单播。"
+"注意：这不是 802.11v 中的定向多播服务 (DMS)。注意：可能会破坏接收端 STA 多播"
+"预期。"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1511
 msgid "ATM (Asynchronous Transfer Mode)"
@@ -876,7 +922,7 @@ msgstr "应用并保留设置"
 
 #: modules/luci-base/htdocs/luci-static/resources/ui.js:4640
 msgid "Apply and revert on connectivity loss"
-msgstr ""
+msgstr "应用并恢复丢失链接"
 
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js:119
 msgid "Apply backup?"
@@ -1027,6 +1073,12 @@ msgstr "可用"
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/wireless.js:293
 msgid "Average:"
 msgstr "平均："
+
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:456
+msgid ""
+"Avoid uselessly triggering dial-on-demand links (filters SRV/SOA records and "
+"names with underscores)."
+msgstr "避免无用地触发按需拨号链接（过滤 SRV/SOA 记录和带有下划线的名称）。"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1505
 msgid "B43 + B43C"
@@ -1720,6 +1772,25 @@ msgstr "当前工作日"
 msgid "Custom Interface"
 msgstr "自定义接口"
 
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:266
+msgid "custom_domain"
+msgstr "自定义域名"
+
+msgid "Custom Redirect Domain"
+msgstr "‎自定义挟持域名"
+
+msgid "Comments"
+msgstr "备注"
+
+msgid "Define a custom domain name and the corresponding PTR record"
+msgstr "自定义域名对应的IP地址 (需要客户端DNS指向本路由)"
+
+msgid "Domain Name"
+msgstr "域名 (不带HTTPS)"
+
+msgid "-Address"
+msgstr "-地址"
+
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js:410
 msgid ""
 "Custom files (certificates, scripts) may remain on the system. To prevent "
@@ -2248,6 +2319,12 @@ msgstr "是否要替换当前密钥？"
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:592
 msgid "Domain"
 msgstr "域名"
+
+msgid "DNS Redirect"
+msgstr "DNS 重定向"
+
+msgid "Redirect client DNS to dnsmasq"
+msgstr "重定向客户端DNS到dnsmasq"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:261
 msgid "Domain required"
@@ -2969,8 +3046,8 @@ msgid "Force"
 msgstr "强制"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:971
-msgid "Force 40MHz mode"
-msgstr "强制 40MHz 模式"
+msgid "Force 40/80MHz mode"
+msgstr "强制 40/80MHz 模式"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:1237
 msgid "Force CCMP (AES)"
@@ -4810,6 +4887,10 @@ msgstr ""
 msgid "Maximum transmit power"
 msgstr "最大传输功率"
 
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:457
+msgid "May prevent VoIP or other services from working."
+msgstr "可能造成 VoIP 或其他服务无法运作。"
+
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:129
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:188
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:199
@@ -5043,12 +5124,20 @@ msgstr "下移"
 msgid "Move up"
 msgstr "上移"
 
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:1151
+msgid "Multi To Unicast"
+msgstr "多播到单播"
+
 #: protocols/luci-proto-gre/htdocs/luci-static/resources/protocol/gre.js:89
 #: protocols/luci-proto-gre/htdocs/luci-static/resources/protocol/gretap.js:94
 #: protocols/luci-proto-gre/htdocs/luci-static/resources/protocol/grev6.js:91
 #: protocols/luci-proto-gre/htdocs/luci-static/resources/protocol/grev6tap.js:96
 msgid "Multicast"
 msgstr "多播"
+
+#: protocols/luci-proto-batman-adv/htdocs/luci-static/resources/protocol/batadv.js:99
+msgid "Multicast Mode"
+msgstr "多播模式"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/tools/network.js:705
 msgid "Multicast routing"
@@ -9972,3 +10061,40 @@ msgstr "是"
 #: modules/luci-compat/luasrc/view/cbi/delegator.htm:20
 msgid "« Back"
 msgstr "« 后退"
+
+msgid "Online Users"
+msgstr "在线用户数"
+
+msgid "Minimum TTL to send to clients"
+msgstr "客户端缓存的最小 DNS TTL"
+
+msgid "Modify DNS entries minimum TTL (max is 86400, 0 is no modify)"
+msgstr "修改发送到客户端的域名记录的 TTL 时间 (最大 86400, 0 表示不修改)"
+
+msgid "Disable IPv6 DNS forwards"
+msgstr "禁止解析 IPv6 DNS 记录"
+
+msgid "Filter IPv6(AAAA) DNS Query Name Resolve"
+msgstr "过滤掉 IPv6(AAAA) ，只返回 IPv4 DNS 域名记录"
+
+msgid "Remove IPv6 addresses from the results and only return IPv4 addresses."
+msgstr "从结果中删除 IPv6 地址并仅返回 IPv4 地址。"
+
+msgid "Can be useful if ISP has IPv6 nameservers but does not provide IPv6 routing."
+msgstr "如果 ISP 有 IPv6 名称服务器但不提供 IPv6 路由，则可能很有用。"
+
+msgid "Disable IPv4 DNS forwards"
+msgstr "禁止解析 IPv4 DNS 记录"
+
+msgid "Filter IPv4(A) DNS Query Name Resolve"
+msgstr "过滤掉 IPv4(A) ，只返回 IPv4 DNS 域名记录"
+
+msgid "Remove IPv4 addresses from the results and only return IPv6 addresses."
+msgstr "从结果中删除 IPv4 地址并仅返回 IPv6 地址。"
+
+msgid "Firewall (iptables)"
+msgstr "防火墙 (iptables)"
+
+msgid "Firewall (nftables)"
+msgstr "防火墙 (nftables)"
+
